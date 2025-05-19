@@ -38,32 +38,26 @@ unsigned int faStr1(const char *str) {
 }
 unsigned int faStr2(const char *str) {
     unsigned int count = 0;
-  bool in_word = false;
-  bool valid_word = false;
-
-  while (*str) {
-    if (std::isalpha(*str)) {
-      if (!in_word) {
-        in_word = true;
-        valid_word = std::isupper(*str);
-      } else {
-        if (!std::islower(*str)) {
-          valid_word = false;
+    while (*str != '\0') {
+        if (isupper(*str)) {
+            const char* start_word = str;
+            
+            bool valid = true;
+            
+            for (++str; *str && !isspace(*str); ++str) {
+                if (!islower(*str)) {
+                    valid = false;
+                    break;
+                }
+            }
+            if (valid) {
+                count++;
+            }
+        } else {
+            while (*str && !isspace(*str)) ++str;
         }
-      }
-    } else {
-      if (in_word) {
-        in_word = false;
-        if (valid_word) {
-          count++;
-        }
-      }
+        while (*str && isspace(*str)) ++str;
     }
-    str++;
-  }
-  if (in_word && valid_word) {
-    count++;
-  }
 return count;
 }
 unsigned int faStr3(const char *str) {
