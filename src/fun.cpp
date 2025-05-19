@@ -4,19 +4,34 @@
 #include <cctype>
 unsigned int faStr1(const char *str) {
     unsigned int count = 0;
-    bool isWord = false;
+    bool inWord = false;
+    bool validWord = true;
     while (*str) {
-        if (isalpha(*str)) {
-            isWord = true;
-        } else if (isspace(*str) || ispunct(*str)) {
-            if (isWord) {
-                count++;
-                isWord = false;
+        if (std::isalpha(*str)) {
+            if (!inWord) {
+                inWord = true;
+                validWord = true;
+            }
+        } else if (std::isdigit(*str)) {
+            if (inWord) {
+                validWord = false;
+            }
+        } else if (std::isspace(*str) || std::ispunct(*str)) {
+            if (inWord) {
+                if (validWord) {
+                    count++;
+                }
+                inWord = false;
+                validWord = true;
+            }
+        } else {
+            if (inWord) {
+                validWord = false;
             }
         }
         str++;
     }
-    if (isWord) {
+    if (inWord && validWord) {
         count++;
     }
     return count;
@@ -30,13 +45,16 @@ bool isLowerLatin(char c) {
 unsigned int faStr2(const char *str) {
     unsigned int count = 0;
     bool inWord = false;
+
     while (*str) {
         if (std::isspace(*str) || std::ispunct(*str)) {
             inWord = false;
         } else {
             if (!inWord) {
                 if (std::isupper(*str)) {
-                    count++;
+                    if (*(str + 1) == ' ' || *(str + 1) == '\0' || std::ispunct(*(str + 1))) {
+                        count++;
+                    }
                 }
                 inWord = true;
             }
