@@ -3,47 +3,31 @@
 #include <iostream>
 #include <cctype>
 unsigned int faStr1(const char *str) {
-    unsigned int count = 0;
+    unsigned int wordCount = 0;
+    size_t len = std::strlen(str);
     bool inWord = false;
-    bool validWord = true;
-    while (*str) {
-        if (std::isalpha(*str)) {
-            if (!inWord) {
-                inWord = true;
-                validWord = true;
-            }
-        } else if (std::isdigit(*str)) {
-            if (inWord) {
-                validWord = false;
-            }
-        } else if (std::isspace(*str) || std::ispunct(*str)) {
-            if (inWord) {
-                if (validWord) {
-                    count++;
-                }
-                inWord = false;
-                validWord = true;
-            }
-        } else {
-            if (inWord) {
-                validWord = false;
-            }
+    bool hasDigit = false;
+    for (size_t i = 0; i <= len; ++i) {
+        if ((!std::isspace(str[i]) && !std::isdigit(str[i])) || i == len) {
+            if (inWord && !hasDigit)
+                wordCount++;
+                
+            inWord = false;
+            hasDigit = false;
+        } else if (std::isalnum(str[i])) {
+            inWord = true;
+            if (std::isdigit(str[i]))
+                hasDigit = true;
         }
-        str++;
     }
-    if (inWord && validWord) {
-        count++;
-    }
-    return count;
+    return wordCount;
 }
 unsigned int faStr2(const char *str) {
     unsigned int count = 0;
     while (*str != '\0') {
         if (isupper(*str)) {
             const char* start_word = str;
-            
             bool valid = true;
-            
             for (++str; *str && !isspace(*str); ++str) {
                 if (!islower(*str)) {
                     valid = false;
