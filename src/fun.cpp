@@ -7,13 +7,13 @@
 #define MAX_BUFFER_SIZE 1024
 unsigned int faStr1(const char *str) {
    unsigned int count = 0;
-    char buffer[MAX_BUFFER_SIZE];
-    snprintf(buffer, sizeof(buffer), "%s", str);
-    char *saveptr = nullptr;
-    char *token = strtok_r(buffer, " ", &saveptr);
-    while (token != nullptr) {
-        bool contains_digit = false;
-        for (size_t j = 0; token[j] != '\0'; ++j) {
+   char buffer[MAX_BUFFER_SIZE];
+   snprintf(buffer, sizeof(buffer), "%s", str);
+   char *saveptr = nullptr;
+   char *token = strtok_r(buffer, " ", &saveptr);
+   while (token != nullptr) {
+      bool contains_digit = false;
+         for (size_t j = 0; token[j] != '\0'; ++j) {
             if (std::isdigit(token[j])) {
                 contains_digit = true;
                 break;
