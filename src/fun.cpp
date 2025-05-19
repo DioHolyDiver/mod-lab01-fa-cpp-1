@@ -40,7 +40,7 @@ unsigned int faStr2(const char *str) {
                 if (std::isupper(*str)) {
                     count++;
                     inWord = true;
-                } else { 
+                } else {
                     inWord = true;
                 }
             } else if (!std::islower(*str)) {
