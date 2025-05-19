@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cctype>
 #include <cstring>
+#include <cstdio>
 #define MAX_BUFFER_SIZE 1024
 unsigned int faStr1(const char *str) {
    unsigned int count = 0;
