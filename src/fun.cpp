@@ -8,8 +8,6 @@ unsigned int faStr1(const char *str) {
     while (*str) {
         if (isalpha(*str)) {
             isWord = true;
-        } else if (isdigit(*str)) {
-            isWord = false;
         } else if (isspace(*str) || ispunct(*str)) {
             if (isWord) {
                 count++;
@@ -33,23 +31,19 @@ unsigned int faStr2(const char *str) {
     unsigned int count = 0;
     bool inWord = false;
     while (*str) {
-        if (std::isspace(*str)) {
+        if (std::isspace(*str) || std::ispunct(*str)) {
             inWord = false;
         } else {
             if (!inWord) {
                 if (std::isupper(*str)) {
                     count++;
-                    inWord = true;
-                } else {
-                    inWord = true;
                 }
-            } else if (!std::islower(*str)) {
-                inWord = false;
+                inWord = true;
             }
         }
         str++;
     }
-    return count;
+return count;
 }
 unsigned int faStr3(const char *str) {
     unsigned int totalLength = 0;
