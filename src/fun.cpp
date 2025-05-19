@@ -2,12 +2,14 @@
 #include "fun.h"
 #include <iostream>
 #include <cctype>
-#include <cstring> 
+#include <cstring>
+#define MAX_BUFFER_SIZE 1024
 unsigned int faStr1(const char *str) {
    unsigned int count = 0;
-    char copy[strlen(str) + 1];
-    strcpy(copy, str);
-    char *token = strtok(copy, " ");
+    char buffer[MAX_BUFFER_SIZE];
+    snprintf(buffer, sizeof(buffer), "%s", str);
+    char *saveptr = nullptr;
+    char *token = strtok_r(buffer, " ", &saveptr);
     while (token != nullptr) {
         bool contains_digit = false;
         for (size_t j = 0; token[j] != '\0'; ++j) {
@@ -19,7 +21,7 @@ unsigned int faStr1(const char *str) {
         if (!contains_digit) {
             count++;
         }
-        token = strtok(nullptr, " ");
+        token = strtok_r(nullptr, " ", &saveptr);
     }
     return count;
 }
