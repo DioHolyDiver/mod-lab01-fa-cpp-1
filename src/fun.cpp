@@ -2,24 +2,27 @@
 #include "fun.h"
 #include <iostream>
 #include <cctype>
+#include <cstring> 
 unsigned int faStr1(const char *str) {
-    unsigned int wordCount = 0;
-    size_t len = strlen(str);
-    bool inWord = false;
-    bool hasDigit = false;
-    for (size_t i = 0; i <= len; ++i) {
-        if ((!isspace(str[i]) && !isdigit(str[i])) || i == len) {
-            if (inWord && !hasDigit)
-                wordCount++;
-            inWord = false;
-            hasDigit = false;
-        } else if (isalnum(str[i])) {
-            inWord = true;
-            if (isdigit(str[i]))
-                hasDigit = true;
+    unsigned int faStr1(const char *str) {
+    unsigned int count = 0;
+    char copy[strlen(str) + 1];
+    strcpy(copy, str);
+    char *token = strtok(copy, " ");
+    while (token != nullptr) {
+        bool contains_digit = false;
+        for (size_t j = 0; token[j] != '\0'; ++j) {
+            if (std::isdigit(token[j])) {
+                contains_digit = true;
+                break;
+            }
         }
+        if (!contains_digit) {
+            count++;
+        }
+        token = strtok(nullptr, " ");
     }
-    return wordCount;
+    return count;
 }
 unsigned int faStr2(const char *str) {
     unsigned int count = 0;
