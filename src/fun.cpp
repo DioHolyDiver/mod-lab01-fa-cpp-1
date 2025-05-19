@@ -45,14 +45,13 @@ bool isLowerLatin(char c) {
 unsigned int faStr2(const char *str) {
     unsigned int count = 0;
     bool inWord = false;
-
     while (*str) {
         if (std::isspace(*str) || std::ispunct(*str)) {
             inWord = false;
         } else {
             if (!inWord) {
                 if (std::isupper(*str)) {
-                    if (*(str + 1) == ' ' || *(str + 1) == '\0' || std::ispunct(*(str + 1))) {
+                    if (*(str + 1) == ' ' || *(str + 1) == '\0' || std::isspace(*(str + 1))) {
                         count++;
                     }
                 }
