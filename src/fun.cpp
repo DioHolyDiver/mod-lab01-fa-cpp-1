@@ -8,11 +8,9 @@ unsigned int faStr1(const char *str) {
     while (*str) {
         if (isalpha(*str)) {
             isWord = true;
-        }
-        else if (isdigit(*str)) {
+        } else if (isdigit(*str)) {
             isWord = false;
-        }
-        else if (isspace(*str) || ispunct(*str)) {
+        } else if (isspace(*str) || ispunct(*str)) {
             if (isWord) {
                 count++;
                 isWord = false;
@@ -25,12 +23,10 @@ unsigned int faStr1(const char *str) {
     }
     return count;
 }
-bool isUpperLatin(char c)
-{
+bool isUpperLatin(char c) {
     return (c >= 'A' && c <= 'Z');
 }
-bool isLowerLatin(char c)
-{
+bool isLowerLatin(char c) {
     return (c >= 'a' && c <= 'z');
 }
 unsigned int faStr2(const char *str) {
@@ -41,11 +37,9 @@ unsigned int faStr2(const char *str) {
         if (!isWordStart && isUpperLatin(*str)) {
             isWordStart = true;
             isValid = true;
-        }
-        else if (isWordStart && !isLowerLatin(*str)) {
+        } else if (isWordStart && !isLowerLatin(*str)) {
             isValid = false;
-        }
-        else if (isWordStart && (*str == ' ' || *str == '\t' || *str == '\n' || !(*str))) {
+        } else if (isWordStart && (*str == ' ' || *str == '\t' || *str == '\n' || !(*str))) {
             if (isValid) {
                 count++;
             }
@@ -75,8 +69,7 @@ unsigned int faStr3(const char *str) {
     }
     if (wordCount != 0) {
         return (totalLength + wordCount / 2) / wordCount;
-    }
-    else {
+    } else {
         return 0;
     }
 }
