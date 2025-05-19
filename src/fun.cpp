@@ -36,30 +36,34 @@ unsigned int faStr1(const char *str) {
     }
     return count;
 }
-bool isUpperLatin(char c) {
-    return (c >= 'A' && c <= 'Z');
-}
-bool isLowerLatin(char c) {
-    return (c >= 'a' && c <= 'z');
-}
 unsigned int faStr2(const char *str) {
     unsigned int count = 0;
-    bool inWord = false;
-    while (*str) {
-        if (std::isspace(*str) || std::ispunct(*str)) {
-            inWord = false;
-        } else {
-            if (!inWord) {
-                if (std::isupper(*str)) {
-                    if (*(str + 1) == ' ' || *(str + 1) == '\0' || std::isspace(*(str + 1))) {
-                        count++;
-                    }
-                }
-                inWord = true;
-            }
+  bool in_word = false;
+  bool valid_word = false;
+
+  while (*str) {
+    if (std::isalpha(*str)) {
+      if (!in_word) {
+        in_word = true;
+        valid_word = std::isupper(*str);
+      } else {
+        if (!std::islower(*str)) {
+          valid_word = false;
         }
-        str++;
+      }
+    } else {
+      if (in_word) {
+        in_word = false;
+        if (valid_word) {
+          count++;
+        }
+      }
     }
+    str++;
+  }
+  if (in_word && valid_word) {
+    count++;
+  }
 return count;
 }
 unsigned int faStr3(const char *str) {
