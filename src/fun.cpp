@@ -4,8 +4,7 @@
 #include <cctype>
 #include <cstring> 
 unsigned int faStr1(const char *str) {
-    unsigned int faStr1(const char *str) {
-    unsigned int count = 0;
+   unsigned int count = 0;
     char copy[strlen(str) + 1];
     strcpy(copy, str);
     char *token = strtok(copy, " ");
