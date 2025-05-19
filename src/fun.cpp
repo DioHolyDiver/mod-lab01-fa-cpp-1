@@ -33,17 +33,14 @@ unsigned int faStr2(const char *str) {
     unsigned int count = 0;
     bool inWord = false;
     while (*str) {
-        if (std::isspace(*str)) {
-            inWord = false; 
+        if (std::isspace(*str)) {inWord = false; 
         } else {
             if (!inWord) {
-                if (std::isupper(*str)) {
-                    count++; 
+                if (std::isupper(*str)) {count++; 
                     inWord = true;
-                } else {
-                    inWord = true; 
+                } else { inWord = true; 
                 }
-            } else if (!std::islower(*str) && !std::isupper(*str) && !std::isspace(*str)) {
+            }else if (!std::islower(*str)&&!std::isupper(*str) && !std::isspace(*str)){
                 inWord = false;
             }
         }
