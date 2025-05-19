@@ -31,20 +31,21 @@ bool isLowerLatin(char c) {
 }
 unsigned int faStr2(const char *str) {
     unsigned int count = 0;
-    bool inWord = false;
+    bool inWord = false; 
     while (*str) {
-        if (std::isspace(*str)) {inWord = false; 
+        if (std::isspace(*str)) {
+            inWord = false;
         } else {
             if (!inWord) {
-                if (std::isupper(*str)) {count++; 
-                    inWord = true;
-                } else { inWord = true; 
+                if (std::isupper(*str)) {
+                    count++; 
+                    inWord = true; 
+                } else {
+                    inWord = true; 
                 }
-            }else if (!std::islower(*str)&&!std::isupper(*str) && !std::isspace(*str)){
-                inWord = false;
+            } else if (!std::islower(*str)) { inWord = false;
             }
-        }
-        str++;
+        } str++; 
     }
     return count;
 }
