@@ -4,19 +4,18 @@
 #include <cctype>
 unsigned int faStr1(const char *str) {
     unsigned int wordCount = 0;
-    size_t len = std::strlen(str);
+    size_t len = strlen(str);
     bool inWord = false;
     bool hasDigit = false;
     for (size_t i = 0; i <= len; ++i) {
-        if ((!std::isspace(str[i]) && !std::isdigit(str[i])) || i == len) {
+        if ((!isspace(str[i]) && !isdigit(str[i])) || i == len) {
             if (inWord && !hasDigit)
                 wordCount++;
-                
             inWord = false;
             hasDigit = false;
-        } else if (std::isalnum(str[i])) {
+        } else if (isalnum(str[i])) {
             inWord = true;
-            if (std::isdigit(str[i]))
+            if (isdigit(str[i]))
                 hasDigit = true;
         }
     }
